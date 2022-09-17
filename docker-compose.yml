@@ -1,0 +1,33 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./api/apollo
+      args:
+        COMMIT: ebc762b
+    depends_on:
+      - mongo-db
+    container_name: find-my-abode-api
+    ports:
+      - 4000:4000
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASS}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@mongo:27017/
+  mongo-db:
+    image: mongo
+    container_name: find-my-abode-mongo-db
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-db-data:/data/db
+      - mongo-db-config:/data/configdb
+      - ./api/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: DB
+volumes:
+  mongo-db-data:
+  mongo-db-config:

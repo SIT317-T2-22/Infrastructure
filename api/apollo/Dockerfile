@@ -1,0 +1,19 @@
+FROM node:14 AS builder
+
+# set working directory
+WORKDIR /app
+
+ARG REPOSITORY=https://github.com/SIT317-T2-22/API.git
+ENV REPOSITORY=$REPOSITORY
+
+ARG COMMIT
+ENV COMMIT=$COMMIT
+
+RUN git clone $REPOSITORY .
+RUN git checkout $COMMIT
+
+RUN npm ci
+
+ENV DATABASE_HOST mongo-db
+
+ENTRYPOINT ["npm", "start"]
