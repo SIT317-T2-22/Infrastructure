@@ -4,7 +4,7 @@ services:
     build:
       context: ./api/apollo
       args:
-        COMMIT: ebc762b
+        COMMIT: 2e93d31
     depends_on:
       - mongo-db
     container_name: find-my-abode-api
