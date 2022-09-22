@@ -4,16 +4,17 @@ services:
     build:
       context: ./api/apollo
       args:
-        COMMIT: c2afc30
+        COMMIT: 0b9c4ed
     depends_on:
       - mongo-db
     container_name: find-my-abode-api
     ports:
       - 4000:4000
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      - PORT=4001
+      - MONGO_HOST=localhost
+      - MONGO_USERNAME=root
+      - MONGO_PASSWORD=example
   mongo-db:
     image: mongo
     container_name: find-my-abode-mongo-db
@@ -25,9 +26,9 @@ services:
       - mongo-db-config:/data/configdb
       - ./api/mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: DB
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_DATABASE=DB
 volumes:
   mongo-db-data:
   mongo-db-config:
