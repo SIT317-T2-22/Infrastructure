@@ -4,16 +4,16 @@ services:
     build:
       context: ./api/apollo
       args:
-        COMMIT: 99c9a12
+        COMMIT: c2afc30
     depends_on:
       - mongo-db
     container_name: find-my-abode-api
     ports:
       - 4000:4000
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USER}
-      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASS}
-      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER}:${MONGO_PASS}@mongo:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
   mongo-db:
     image: mongo
     container_name: find-my-abode-mongo-db
