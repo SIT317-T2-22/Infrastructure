@@ -9,7 +9,7 @@ services:
       - mongo-db
     container_name: find-my-abode-api
     ports:
-      - 4000:4000
+      - 4000:4001
     environment:
       - PORT=4001
       - MONGO_HOST=mongo-db
