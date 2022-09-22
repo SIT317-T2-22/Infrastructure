@@ -12,7 +12,7 @@ services:
       - 4000:4000
     environment:
       - PORT=4001
-      - MONGO_HOST=localhost
+      - MONGO_HOST=mongo-db
       - MONGO_USERNAME=root
       - MONGO_PASSWORD=example
   mongo-db:
